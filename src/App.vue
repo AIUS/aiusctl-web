@@ -1,7 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <md-toolbar>
+      <md-button class="md-icon-button">
+        <md-icon>menu</md-icon>
+      </md-button>
+
+      <h2 class="md-title">AIUS</h2>
+    </md-toolbar>
+
+    <section class="main">
+      <hello />
+    </section>
   </div>
 </template>
 
@@ -17,12 +26,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app > .main {
+  padding: 8px 24px;
 }
 </style>
