@@ -9,7 +9,7 @@
     </md-toolbar>
 
     <section class="main">
-      <hello />
+      <router-view />
     </section>
 
 
@@ -20,7 +20,14 @@
         </div>
       </md-toolbar>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi cupiditate esse necessitatibus beatae nobis, deserunt ut est fugit, tempora deleniti, eligendi commodi doloribus. Nemo, assumenda possimus, impedit inventore perferendis iusto!</p>
+      <md-list class="dense">
+        <md-list-item>
+          <router-link :to="{ name: 'home' }" exact>Home</router-link>
+        </md-list-item>
+        <md-list-item>
+          <router-link to="/not-found">Nico-nico~</router-link>
+        </md-list-item>
+      </md-list>
     </md-sidenav>
   </div>
 </template>
@@ -28,18 +35,8 @@
 <script>
 import { mapActions } from 'vuex';
 
-import Hello from './components/Hello';
-
 export default {
   name: 'app',
-  components: {
-    Hello,
-  },
-  computed: {
-    test() {
-      return this.$store.getters['ui/sidebar'];
-    },
-  },
   mounted() {
     this.$store.watch(() => this.$store.getters['ui/sidebar'], (newVal, oldVal) => {
       if (newVal === oldVal) return;
