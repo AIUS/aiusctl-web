@@ -1,4 +1,4 @@
-# frontend
+# `aiusctl-web`
 
 > Web frontend for AIUS' APIs and services using VueJS
 

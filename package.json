@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "aiusctl-web",
   "version": "1.0.0",
   "description": "Web frontend for AIUS' APIs and services using VueJS",
   "author": "Quentin Gliech <quentingliech@gmail.com>",
