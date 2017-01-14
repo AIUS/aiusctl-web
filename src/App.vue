@@ -5,7 +5,7 @@
         <md-icon>menu</md-icon>
       </md-button>
 
-      <h2 class="md-title">{{test}}</h2>
+      <h2 class="md-title">AIUS</h2>
     </md-toolbar>
 
     <section class="main">
@@ -16,13 +16,16 @@
     <md-sidenav ref="sidebar" class="md-left" @open="open" @close="close">
       <md-toolbar class="md-large">
         <div class="md-toolbar-container">
-          <h3 class="md-title">Sidenav content</h3>
+          <h3 class="md-title">AIUS</h3>
         </div>
       </md-toolbar>
 
       <md-list class="dense">
         <md-list-item>
-          <router-link :to="{ name: 'home' }" exact>Home</router-link>
+          <router-link :to="{ name: 'home' }" exact>Accueil</router-link>
+        </md-list-item>
+        <md-list-item>
+          <router-link :to="{ name: 'login' }" exact>Connexion</router-link>
         </md-list-item>
         <md-list-item>
           <router-link to="/not-found">Nico-nico~</router-link>

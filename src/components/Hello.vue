@@ -1,5 +1,12 @@
 <template>
   <div class="hello">
+    <div>
+      <h1>Test'zone</h1>
+      <ul>
+        <li><router-link :to="{ name: 'login' }" exact>Login</router-link></li>
+        <li><router-link :to="{ name: 'dashboard' }" exact>Dashboard</router-link></li>
+      </ul>
+    </div>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
