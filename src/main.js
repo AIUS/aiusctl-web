@@ -5,7 +5,10 @@ import VueMaterial from 'vue-material';
 
 import App from './App';
 import store from './store';
-import router from './router';
+import router, { restrict } from './router';
+
+// Needed to inject beforeEach hooks
+restrict(store);
 
 Vue.use(VueMaterial);
 

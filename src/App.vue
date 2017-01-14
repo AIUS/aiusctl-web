@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <md-toolbar>
-      <md-button class="md-icon-button" @click="open">
+      <md-button class="md-icon-button" @click="toggleSidebar">
         <md-icon>menu</md-icon>
       </md-button>
 
@@ -12,8 +12,7 @@
       <router-view />
     </section>
 
-
-    <md-sidenav ref="sidebar" class="md-left" @open="open" @close="close">
+    <md-sidenav ref="sidebar" class="md-left">
       <md-toolbar class="md-large">
         <div class="md-toolbar-container">
           <h3 class="md-title">AIUS</h3>
@@ -36,25 +35,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   name: 'app',
-  mounted() {
-    this.$store.watch(() => this.$store.getters['ui/sidebar'], (newVal, oldVal) => {
-      if (newVal === oldVal) return;
-      if (newVal) {
-        this.$refs.sidebar.open();
-      } else {
-        this.$refs.sidebar.close();
-      }
-    });
-  },
   methods: {
-    ...mapActions({
-      open: 'ui/openSidebar',
-      close: 'ui/closeSidebar',
-    }),
+    toggleSidebar() {
+      this.$refs.sidebar.toggle();
+    },
+    close() {
+      this.$refs.sidebar.close();
+    },
   },
 };
 </script>
