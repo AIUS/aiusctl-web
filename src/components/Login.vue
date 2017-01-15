@@ -2,22 +2,22 @@
   <md-card :class="['login-card', { pending, errored, logged }]">
     <form @submit.prevent="login">
       <md-card-header>
-        <div class="md-title">Login</div>
+        <div class="md-title">Connexion</div>
       </md-card-header>
 
       <md-card-content>
         <md-input-container>
-          <label>Username</label>
+          <label>Nom d'utilisateur</label>
           <md-input :disabled="pending || logged" v-model="username" type="text"></md-input>
         </md-input-container>
         <md-input-container md-has-password>
-          <label>Password</label>
+          <label>Mot de passe</label>
           <md-input :disabled="pending || logged" v-model="password" type="password"></md-input>
         </md-input-container>
       </md-card-content>
 
       <md-card-actions>
-        <md-button :disabled="pending || logged" type="submit" class="md-raised md-primary">Login</md-button>
+        <md-button :disabled="pending || logged" type="submit" class="md-raised md-primary">Connexion</md-button>
       </md-card-actions>
     </form>
     <md-spinner md-indeterminate />

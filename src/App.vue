@@ -23,11 +23,14 @@
         <md-list-item>
           <router-link :to="{ name: 'home' }" exact>Accueil</router-link>
         </md-list-item>
-        <md-list-item>
-          <router-link :to="{ name: 'login' }" exact>Connexion</router-link>
+        <md-list-item v-if="logged">
+          <router-link :to="{ name: 'dashboard' }" exact>Tableau de bord</router-link>
         </md-list-item>
-        <md-list-item>
-          <router-link to="/not-found">Nico-nico~</router-link>
+        <md-list-item @click.capture="logout(token)" v-if="logged">
+          <router-link :to="{ name: 'home' }">Déconnexion</router-link>
+        </md-list-item>
+        <md-list-item v-if="!logged">
+          <router-link :to="{ name: 'login' }" exact>Connexion</router-link>
         </md-list-item>
       </md-list>
     </md-sidenav>
@@ -35,6 +38,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'app',
   methods: {
@@ -44,6 +49,17 @@ export default {
     close() {
       this.$refs.sidebar.close();
     },
+    logout(token) {
+      this.$store.dispatch('auth/logout', {
+        token,
+      });
+    },
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'logged',
+      'token',
+    ]),
   },
 };
 </script>

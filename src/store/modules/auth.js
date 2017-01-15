@@ -2,6 +2,7 @@ const types = {
   START_LOGIN: 'START_LOGIN',
   LOGIN: 'LOGIN',
   LOGIN_ERROR: 'LOGIN_ERROR',
+  START_LOGOUT: 'START_LOGOUT',
   LOGOUT: 'LOGOUT',
   LOGOUT_ERROR: 'LOGOUT_ERROR',
   VALIDATE: 'VALIDATE',
@@ -47,8 +48,22 @@ const actions = {
       commit(types.LOGIN_ERROR, 'Unknown error while trying to log in');
     }
   },
-  logout() {
+  logout: async ({ commit, state }, { token }) => {
+    commit(types.START_LOGOUT);
+    try {
+      const res = await fetch(`${state.endpoint}/token/${token}`, {
+        method: 'DELETE',
+      });
 
+      if (res.status !== 200) {
+        commit(types.LOGOUT_ERROR, `Error ${res.status}`);
+        return;
+      }
+
+      commit(types.LOGOUT, 'Logged out with success');
+    } catch (e) {
+      commit(types.LOGOUT_ERROR, 'Unknown error while trying to log out');
+    }
   },
   validate() {
 
@@ -56,17 +71,30 @@ const actions = {
 };
 
 const mutations = {
+  [types.START_LOGIN](state) {
+    state.pending = true;
+    state.errored = false;
+  },
   [types.LOGIN](state, token) {
     state.token = token;
     state.pending = false;
     state.errored = false;
   },
-  [types.START_LOGIN](state) {
+  [types.LOGIN_ERROR](state) {
+    // @TODO: Do something with the message
+    state.pending = false;
+    state.errored = true;
+  },
+  [types.START_LOGOUT](state) {
     state.pending = true;
     state.errored = false;
   },
-  [types.LOGIN_ERROR](state) {
-    // @TODO: Do something with the message
+  [types.LOGOUT](state) {
+    state.token = null;
+    state.pending = false;
+    state.errored = false;
+  },
+  [types.LOGOUT_ERROR](state) {
     state.pending = false;
     state.errored = true;
   },
