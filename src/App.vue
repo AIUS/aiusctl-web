@@ -24,10 +24,19 @@
           <router-link :to="{ name: 'home' }" exact>Accueil</router-link>
         </md-list-item>
         <md-list-item v-if="logged">
-          <router-link :to="{ name: 'dashboard' }" exact>Tableau de bord</router-link>
+          <router-link :to="{ name: 'sales' }" exact>Caisse</router-link>
+        </md-list-item>
+        <md-list-item v-if="logged">
+          <router-link :to="{ name: 'crocs' }" exact>Gestion des Crocs</router-link>
+        </md-list-item>
+        <md-list-item v-if="logged">
+          <router-link :to="{ name: 'calendar' }" exact>Calendrier</router-link>
+        </md-list-item>
+        <md-list-item v-if="logged">
+          <router-link :to="{ name: 'settings' }" exact>Modifier mes informations</router-link>
         </md-list-item>
         <md-list-item @click.capture="logout(token)" v-if="logged">
-          <router-link :to="{ name: 'home' }">Déconnexion</router-link>
+          <router-link :to="{ name: 'login' }">Déconnexion</router-link>
         </md-list-item>
         <md-list-item v-if="!logged">
           <router-link :to="{ name: 'login' }" exact>Connexion</router-link>
@@ -53,6 +62,7 @@ export default {
       this.$store.dispatch('auth/logout', {
         token,
       });
+      this.$router.go('/login');
     },
   },
   computed: {

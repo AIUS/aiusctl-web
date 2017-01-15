@@ -1,25 +1,44 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Hello from './components/Hello';
+import Home from './components/Home';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import Calendar from './components/Calendar';
+import Crocs from './components/Crocs';
+import Sales from './components/Sales';
+import Settings from './components/Settings';
 
 Vue.use(VueRouter);
 
 const routes = [{
   name: 'home',
   path: '/',
-  component: Hello,
+  meta: { requiresAuth: true },
+  component: Home,
 }, {
   name: 'login',
   path: '/login',
   component: Login,
 }, {
-  name: 'dashboard',
-  path: '/dashboard',
+  name: 'calendar',
+  path: '/calendar',
   meta: { requiresAuth: true },
-  component: Dashboard,
+  component: Calendar,
+}, {
+  name: 'crocs',
+  path: '/crocs',
+  meta: { requiresAuth: true },
+  component: Crocs,
+}, {
+  name: 'sales',
+  path: '/sales',
+  meta: { requiresAuth: true },
+  component: Sales,
+}, {
+  name: 'settings',
+  path: '/settings',
+  meta: { requiresAuth: true },
+  component: Settings,
 }];
 
 const router = new VueRouter({
@@ -38,8 +57,8 @@ export const restrict = (store) => {
         query: { redirect: to.fullPath },
       });
     } else if (to.name === 'login' && store.getters['auth/logged']) {
-      // Redirect to dashboard if already logged in
-      next({ name: 'dashboard' });
+      // Redirect to home if already logged in
+      next({ name: 'home' });
     } else {
       next();
     }

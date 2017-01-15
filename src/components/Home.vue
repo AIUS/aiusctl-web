@@ -1,13 +1,7 @@
 <template>
-  <div class="hello">
-    <div>
-      <h1>Test'zone</h1>
-      <ul>
-        <li><router-link :to="{ name: 'login' }" exact>Login</router-link></li>
-        <li><router-link :to="{ name: 'dashboard' }" exact>Dashboard</router-link></li>
-      </ul>
-    </div>
+  <div class="home">
     <h1>{{ msg }}</h1>
+    <p><strong>DEBUG :</strong> token = {{ token }}</p>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -28,12 +22,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  name: 'hello',
+  name: 'home',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'Vous êtes bien connectés ! 😊',
     };
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'logged',
+      'token',
+    ]),
   },
 };
 </script>
