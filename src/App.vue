@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <md-toolbar>
-      <md-button class="md-icon-button" @click="toggleSidebar">
-        <md-icon>menu</md-icon>
-      </md-button>
+    <md-layout md-column>
+      <md-toolbar>
+        <md-button class="md-icon-button" @click="toggleSidebar">
+          <md-icon>menu</md-icon>
+        </md-button>
 
-      <h2 class="md-title">AIUS</h2>
-    </md-toolbar>
+        <h2 class="md-title">AIUS</h2>
+      </md-toolbar>
 
-    <section class="main">
-      <router-view />
-    </section>
+      <section class="main">
+        <transition name="fade" appear mode="out-in">
+          <router-view />
+        </transition>
+      </section>
+    </md-layout>
 
     <md-sidenav ref="sidebar" class="md-left">
       <md-toolbar class="md-large">
@@ -90,7 +94,34 @@ export default {
 </script>
 
 <style>
-#app > .main {
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+#app > .md-layout {
+  min-height: 100%;
+}
+
+#app > .md-layout > .main {
+  flex: 1;
   padding: 8px 24px;
+}
+
+#app > .md-layout > .main > * {
+  transform: translate3d(0, 0, 0);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transform: translate3d(0, 0, 0);
+  transition: opacity .2s, transform .2s ease;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0)!important;
 }
 </style>
