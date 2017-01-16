@@ -7,6 +7,7 @@ import Calendar from './components/Calendar';
 import Crocs from './components/Crocs';
 import Sales from './components/Sales';
 import Settings from './components/Settings';
+import Users from './components/Users';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [{
   path: '/settings',
   meta: { requiresAuth: true },
   component: Settings,
+}, {
+  name: 'users',
+  path: '/users',
+  meta: { requiresAuth: true },
+  component: Users,
 }];
 
 const router = new VueRouter({

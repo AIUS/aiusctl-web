@@ -35,6 +35,9 @@
         <md-list-item v-if="logged">
           <router-link :to="{ name: 'settings' }" exact>Modifier mes informations</router-link>
         </md-list-item>
+        <md-list-item v-if="logged">
+          <router-link :to="{ name: 'users' }" exact>Gestion des utilisateurs</router-link>
+        </md-list-item>
         <md-list-item @click.capture="logout(token)" v-if="logged">
           <router-link :to="{ name: 'login' }">Déconnexion</router-link>
         </md-list-item>
