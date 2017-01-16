@@ -54,6 +54,18 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'app',
+  watch: {
+    logged(logged) {
+      if (this.transitionTimeout !== null) {
+        clearTimeout(this.transitionTimeout);
+        this.transitionTimeout = null;
+      }
+
+      if (!logged) {
+        this.transitionTimeout = setTimeout(() => this.$router.push('/login'), 1000);
+      }
+    },
+  },
   methods: {
     toggleSidebar() {
       this.$refs.sidebar.toggle();
@@ -65,7 +77,7 @@ export default {
       this.$store.dispatch('auth/logout', {
         token,
       });
-      this.$router.go('/login');
+      // this.$router.go('/login');
     },
   },
   computed: {
