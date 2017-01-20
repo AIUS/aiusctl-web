@@ -8,10 +8,25 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     auth,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 });
+
+if (module.hot) {
+  module.hot.accept([
+    './modules/auth',
+  ], () => {
+    /* eslint global-require: 0 */
+    store.hotUpdate({
+      modules: {
+        auth: require('./modules/auth').default,
+      },
+    });
+  });
+}
+
+export default store;
