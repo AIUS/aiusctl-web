@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 import Home from './components/Home';
 import Login from './components/Login';
+import PreCrocs from './components/PreCrocs';
+import PreRegister from './components/PreRegister';
 import Calendar from './components/Calendar';
 import Crocs from './components/Crocs';
 import Sales from './components/Sales';
@@ -20,6 +22,14 @@ const routes = [{
   name: 'login',
   path: '/login',
   component: Login,
+}, {
+  name: 'preCrocs',
+  path: '/pre-crocs',
+  component: PreCrocs,
+}, {
+  name: 'preRegister',
+  path: '/pre-register',
+  component: PreRegister,
 }, {
   name: 'calendar',
   path: '/calendar',

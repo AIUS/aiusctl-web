@@ -46,6 +46,12 @@
           <router-link :to="{ name: 'login' }">Déconnexion</router-link>
         </md-list-item>
         <md-list-item v-if="!logged">
+          <router-link :to="{ name: 'preCrocs' }" exact>Réservez votre croc'</router-link>
+        </md-list-item>
+        <md-list-item v-if="!logged">
+          <router-link :to="{ name: 'preRegister' }" exact>Pré-inscription</router-link>
+        </md-list-item>
+        <md-list-item v-if="!logged">
           <router-link :to="{ name: 'login' }" exact>Connexion</router-link>
         </md-list-item>
       </md-list>
