@@ -35,10 +35,8 @@ export default {
       if (!logged) {
         this.$router.push({
           name: 'login',
-          params: {
-            query: {
-              redirect: this.$route.fullPath,
-            },
+          query: {
+            redirect: this.$route.fullPath,
           },
         });
       }
