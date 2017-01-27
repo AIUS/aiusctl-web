@@ -10,6 +10,7 @@ const types = {
   CART_SUBMIT: 'CART_SUBMIT',
   START_CART_SUBMIT: 'START_CART_SUBMIT',
   CART_SUBMIT_ERROR: 'CART_SUBMIT_ERROR',
+  EMPTY_CART: 'EMPTY_CART',
 };
 
 const defaultState = {
@@ -113,6 +114,9 @@ const actions = {
       commit(types.CART_SUBMIT_ERROR, 'Unknown error while trying to submit cart');
     }
   },
+  emptyCart: async ({ commit }) => {
+    commit(types.EMPTY_CART);
+  },
 };
 
 const mutations = {
@@ -169,6 +173,9 @@ const mutations = {
   [types.CART_SUBMIT_ERROR](state) {
     state.pending = false;
     state.errored = true;
+  },
+  [types.EMPTY_CART](state) {
+    state.cart = [];
   },
 };
 

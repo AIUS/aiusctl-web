@@ -42,7 +42,7 @@
           <md-table-cell><strong>TOTAL :</strong></md-table-cell>
           <md-table-cell><strong>{{ total.toFixed(2) }} €</strong></md-table-cell>
           <md-table-cell>
-            <md-button class="md-icon-button"><md-icon>delete</md-icon></md-button>
+            <md-button class="md-icon-button" @click="$store.dispatch('sales/emptyCart')"><md-icon>delete</md-icon></md-button>
             <md-button class="md-icon-button"><md-icon class="md-primary">check</md-icon></md-button>
           </md-table-cell>
         </md-table-row>
