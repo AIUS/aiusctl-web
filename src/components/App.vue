@@ -59,11 +59,7 @@ export default {
 </script>
 
 <style>
-body {
-  height: 100%;
-}
-
-#app {
+body, #app, #app > .md-theme {
   height: 100%;
 }
 
