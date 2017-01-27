@@ -1,21 +1,15 @@
 <template>
   <md-sidenav ref="sidebar" class="md-left main-sidebar md-whiteframe-2dp">
-    <md-toolbar class="md-large">
-      <div class="md-toolbar-container">
-        <h3 class="md-title">AIUS</h3>
-      </div>
+    <md-toolbar class="md-large app-logo" md-theme="white">
+      <router-link :to="{ name: 'home' }">
+        <img src="../../assets/logo.svg" />
+      </router-link>
     </md-toolbar>
 
     <md-list class="dense">
       <md-list-item>
-        <router-link :to="{ name: 'home' }" exact>
-          <md-icon>home</md-icon>
-          <span>Accueil</span>
-        </router-link>
-      </md-list-item>
-      <md-list-item>
         <router-link :to="{ name: 'preCrocs' }">
-          <md-icon style="opacity: 0.54" :md-src="iconUri"></md-icon>
+          <md-icon style="opacity: 0.54" :md-src="crocIconUri"></md-icon>
           <span>Réservez votre croc'</span>
         </router-link>
       </md-list-item>
@@ -68,12 +62,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import iconUri from '../../assets/crocs-icon.svg';
+import crocIconUri from '../../assets/crocs-icon.svg';
 
 export default {
   name: 'sidebar',
   data() {
-    return { iconUri };
+    return { crocIconUri };
   },
   computed: {
     ...mapGetters('auth', ['logged']),
@@ -104,5 +98,22 @@ export default {
   .main-sidebar.md-sidenav .md-backdrop {
     display: none;
   }
+}
+
+.app-logo {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+}
+
+.app-logo a {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-logo img {
+  height: 150px;
+  margin: 16px 0;
 }
 </style>
