@@ -8,8 +8,8 @@ const types = {
 };
 
 const defaultState = {
-  products: null,
-  categories: null,
+  products: [],
+  categories: [],
   pending: false,
   errored: false,
   endpoint: 'https://salesd.aius.u-strasbg.fr',
@@ -19,6 +19,16 @@ const getters = {
   fetched: state => state.products !== null && state.categories !== null,
   pending: state => state.pending,
   errored: state => state.errored,
+  categories: state => ([
+    ...state.categories.map(c => ({
+      ...c,
+      products: state.products.filter(p => p.category === c.id),
+    })),
+    {
+      name: 'Autre',
+      products: state.products.filter(p => !p.category),
+    },
+  ]),
 };
 
 const actions = {
