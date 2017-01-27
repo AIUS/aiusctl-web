@@ -19,25 +19,40 @@
           <span>Réservez votre croc'</span>
         </router-link>
       </md-list-item>
-      <md-list-item>
+      <md-list-item v-if="!logged">
         <router-link :to="{ name: 'preRegister' }">Pré-inscription</router-link>
       </md-list-item>
 
       <template v-if="logged">
         <md-list-item>
-          <router-link :to="{ name: 'sales' }">Caisse</router-link>
+          <router-link :to="{ name: 'sales' }">
+	    <md-icon>shopping_cart</md-icon>
+	    <span>Caisse</span>
+	  </router-link>
         </md-list-item>
         <md-list-item>
-          <router-link :to="{ name: 'crocs' }">Gestion des Crocs</router-link>
+          <router-link :to="{ name: 'crocs' }">
+	    <md-icon>shopping_cart</md-icon>
+	    <span>Gestion des Crocs</span>
+	  </router-link>
         </md-list-item>
         <md-list-item>
-          <router-link :to="{ name: 'calendar' }">Calendrier</router-link>
+          <router-link :to="{ name: 'calendar' }">
+	    <md-icon>event</md-icon>
+	    <span>Calendrier</span>
+	  </router-link>
         </md-list-item>
         <md-list-item>
-          <router-link :to="{ name: 'settings' }">Modifier mes informations</router-link>
+          <router-link :to="{ name: 'settings' }">
+	    <md-icon>settings</md-icon>
+	    <span>Modifier mes informations</span>
+	  </router-link>
         </md-list-item>
         <md-list-item>
-          <router-link :to="{ name: 'users' }">Gestion des utilisateurs</router-link>
+          <router-link :to="{ name: 'users' }">
+	    <md-icon>build</md-icon>
+	    <span>Gestion des utilisateurs</span>
+	  </router-link>
         </md-list-item>
         <md-list-item @click.capture="$store.dispatch('auth/logout')">
           Déconnexion
