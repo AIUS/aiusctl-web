@@ -41,6 +41,25 @@ const actions = {
       commit(types.PRODUCTS_ERROR, 'Unknown error while trying to get products');
     }
   },
+  getCategories: async ({ commit, state }) => {
+    commit(types.START_CATEGORIES);
+    try {
+      const res = await fetch(`${state.endpoint}/categories`, {
+        method: 'GET',
+      });
+
+      const body = await res.json();
+
+      if (res.status !== 200) {
+        commit(types.CATEGORIES_ERROR, body.message);
+        return;
+      }
+
+      commit(types.CATEGORIES, body);
+    } catch (e) {
+      commit(types.CATEGORIES_ERROR, 'Unknown error while trying to get categories');
+    }
+  },
 };
 
 const mutations = {
@@ -54,6 +73,20 @@ const mutations = {
     state.errored = false;
   },
   [types.PRODUCTS_ERROR](state) {
+    // @TODO: Do something with the message
+    state.pending = false;
+    state.errored = true;
+  },
+  [types.START_CATEGORIES](state) {
+    state.pending = true;
+    state.errored = false;
+  },
+  [types.CATEGORIES](state, categories) {
+    state.categories = categories;
+    state.pending = false;
+    state.errored = false;
+  },
+  [types.CATEGORIES_ERROR](state) {
     // @TODO: Do something with the message
     state.pending = false;
     state.errored = true;
