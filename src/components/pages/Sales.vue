@@ -15,7 +15,7 @@
       <md-table-body>
         <md-table-row v-for="product in category.products">
           <md-table-cell>{{ product.name }}</md-table-cell>
-          <md-table-cell>{{ product.price }} €</md-table-cell>
+          <md-table-cell>{{ product.price.toFixed(2) }} €</md-table-cell>
           <md-table-cell><md-button class="md-icon-button" @click="addProduct(product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
       </md-table-body>

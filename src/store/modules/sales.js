@@ -7,6 +7,9 @@ const types = {
   CATEGORIES_ERROR: 'CATEGORIES_ERROR',
   ADD_PRODUCT: 'ADD_PRODUCT',
   REMOVE_PRODUCT: 'REMOVE_PRODUCT',
+  CART_SUBMIT: 'CART_SUBMIT',
+  START_CART_SUBMIT: 'START_CART_SUBMIT',
+  CART_SUBMIT_ERROR: 'CART_SUBMIT_ERROR',
 };
 
 const defaultState = {
@@ -35,7 +38,7 @@ const getters = {
     const product = state.products.find(p => p.id === item.id);
     return ({
       ...item,
-      price: product.price * item.nb,
+      price: product.price * item.quantity,
       product,
     });
   }),
@@ -87,6 +90,29 @@ const actions = {
   removeProduct: async ({ commit, state }, id) => {
     commit(types.REMOVE_PRODUCT, id);
   },
+  submitCart: async ({ commit, state }, data) => {
+    commit(types.START_CART_SUBMIT);
+    try {
+      const res = await fetch(`${state.endpoint}/sales`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(data),
+      });
+
+      const body = await res.json();
+
+      if (res.status !== 200) {
+        commit(types.CART_SUBMIT_ERROR, body.message);
+        return;
+      }
+
+      commit(types.CART_SUBMIT, body);
+    } catch (e) {
+      commit(types.CART_SUBMIT_ERROR, 'Unknown error while trying to submit cart');
+    }
+  },
 };
 
 const mutations = {
@@ -121,16 +147,28 @@ const mutations = {
   [types.ADD_PRODUCT](state, id) {
     const p = state.cart.find(c => c.id === id);
     if (p) {
-      p.nb += 1;
+      p.quantity += 1;
     } else {
       state.cart.push({
         id,
-        nb: 1,
+        quantity: 1,
       });
     }
   },
   [types.REMOVE_PRODUCT](state, id) {
     state.cart = state.cart.filter(c => c.id !== id);
+  },
+  [types.START_CART_SUBMIT](state) {
+    state.pending = true;
+    state.errored = false;
+  },
+  [types.CART_SUBMIT](state) {
+    state.pending = false;
+    state.errored = false;
+  },
+  [types.CART_SUBMIT_ERROR](state) {
+    state.pending = false;
+    state.errored = true;
   },
 };
 
