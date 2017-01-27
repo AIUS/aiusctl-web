@@ -23,6 +23,10 @@ Vue.material.registerTheme({
     accent: 'blue',
     warn: 'deep-orange',
   },
+  white: {
+    primary: 'white',
+    accent: 'blue',
+  },
 });
 
 /* eslint-disable no-new */
