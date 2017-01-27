@@ -5,18 +5,20 @@ const types = {
   START_CATEGORIES: 'START_CATEGORIES',
   CATEGORIES: 'CATEGORIES',
   CATEGORIES_ERROR: 'CATEGORIES_ERROR',
+  ADD_PRODUCT: 'ADD_PRODUCT',
+  REMOVE_PRODUCT: 'REMOVE_PRODUCT',
 };
 
 const defaultState = {
   products: [],
   categories: [],
+  cart: [],
   pending: false,
   errored: false,
   endpoint: 'https://salesd.aius.u-strasbg.fr',
 };
 
 const getters = {
-  fetched: state => state.products !== null && state.categories !== null,
   pending: state => state.pending,
   errored: state => state.errored,
   categories: state => ([
@@ -29,6 +31,7 @@ const getters = {
       products: state.products.filter(p => !p.category),
     },
   ]),
+  cart: state => state.cart,
 };
 
 const actions = {
@@ -70,6 +73,9 @@ const actions = {
       commit(types.CATEGORIES_ERROR, 'Unknown error while trying to get categories');
     }
   },
+  addProduct: async ({ commit, state }, id) => {
+    commit(types.ADD_PRODUCT, id);
+  },
 };
 
 const mutations = {
@@ -100,6 +106,17 @@ const mutations = {
     // @TODO: Do something with the message
     state.pending = false;
     state.errored = true;
+  },
+  [types.ADD_PRODUCT](state, id) {
+    const p = state.cart.find(c => c.id === id);
+    if (p) {
+      p.nb += 1;
+    } else {
+      state.cart.push({
+        id,
+        nb: 1,
+      });
+    }
   },
 };
 

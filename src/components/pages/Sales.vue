@@ -16,7 +16,7 @@
         <md-table-row v-for="product in category.products">
           <md-table-cell>{{ product.name }}</md-table-cell>
           <md-table-cell>{{ product.price }} €</md-table-cell>
-          <md-table-cell><a>Ajouter à la commande</a></md-table-cell>
+          <md-table-cell><md-button class="md-icon-button md-raised" @click="addProduct(product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
       </md-table-body>
     </md-table>
@@ -78,6 +78,9 @@ export default {
     getCategories() {
       this.$store.dispatch('sales/getCategories');
     },
+    addProduct(id) {
+      this.$store.dispatch('sales/addProduct', id);
+    },
   },
   computed: {
     ...mapGetters('sales', [
@@ -85,6 +88,7 @@ export default {
       'errored',
       'fetched',
       'categories',
+      'cart',
     ]),
   },
 };
