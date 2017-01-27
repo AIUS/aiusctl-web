@@ -1,5 +1,5 @@
 <template>
-  <md-sidenav ref="sidebar" class="md-left main-sidebar">
+  <md-sidenav ref="sidebar" class="md-left main-sidebar md-whiteframe-2dp">
     <md-toolbar class="md-large">
       <div class="md-toolbar-container">
         <h3 class="md-title">AIUS</h3>

@@ -12,6 +12,19 @@ restrict(store);
 
 Vue.use(VueMaterial);
 
+Vue.material.registerTheme({
+  default: {
+    primary: 'indigo',
+    accent: 'pink',
+    warn: 'deep-orange',
+  },
+  home: {
+    primary: 'red',
+    accent: 'blue',
+    warn: 'deep-orange',
+  },
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

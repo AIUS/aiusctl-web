@@ -16,7 +16,11 @@ Vue.use(VueRouter);
 const routes = [{
   name: 'home',
   path: '/',
-  meta: { requiresAuth: true },
+  meta: {
+    title: 'Accueil',
+    requiresAuth: true,
+    theme: 'home',
+  },
   component: Home,
 }, {
   name: 'login',
