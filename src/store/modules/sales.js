@@ -84,6 +84,9 @@ const actions = {
   addProduct: async ({ commit, state }, id) => {
     commit(types.ADD_PRODUCT, id);
   },
+  removeProduct: async ({ commit, state }, id) => {
+    commit(types.REMOVE_PRODUCT, id);
+  },
 };
 
 const mutations = {
@@ -125,6 +128,9 @@ const mutations = {
         nb: 1,
       });
     }
+  },
+  [types.REMOVE_PRODUCT](state, id) {
+    state.cart = state.cart.filter(c => c.id !== id);
   },
 };
 

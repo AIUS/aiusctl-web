@@ -16,7 +16,7 @@
         <md-table-row v-for="product in category.products">
           <md-table-cell>{{ product.name }}</md-table-cell>
           <md-table-cell>{{ product.price }} €</md-table-cell>
-          <md-table-cell><md-button class="md-icon-button md-raised" @click="addProduct(product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
+          <md-table-cell><md-button class="md-icon-button" @click="addProduct(product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
       </md-table-body>
     </md-table>
@@ -36,14 +36,14 @@
         <md-table-row v-for="item in cart">
           <md-table-cell>{{ item.product.name }}</md-table-cell>
           <md-table-cell>{{ item.price.toFixed(2) }} €</md-table-cell>
-          <md-table-cell><md-button class="md-icon-button md-raised" @click="addProduct(item.id)"><md-icon>remove_shopping_cart</md-icon></md-table-cell>
+          <md-table-cell><md-button class="md-icon-button" @click="removeProduct(item.id)"><md-icon>remove_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
         <md-table-row>
           <md-table-cell><strong>TOTAL :</strong></md-table-cell>
           <md-table-cell><strong>{{ total.toFixed(2) }} €</strong></md-table-cell>
           <md-table-cell>
-            <md-button class="md-icon-button md-raised"><md-icon>delete</md-icon></md-button>
-            <md-button class="md-icon-button md-raised md-primary"><md-icon>check</md-icon></md-button>
+            <md-button class="md-icon-button"><md-icon>delete</md-icon></md-button>
+            <md-button class="md-icon-button"><md-icon class="md-primary">check</md-icon></md-button>
           </md-table-cell>
         </md-table-row>
       </md-table-body>
@@ -59,18 +59,15 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'sales',
   created() {
-    this.getProducts();
-    this.getCategories();
+    this.$store.dispatch('sales/getProducts');
+    this.$store.dispatch('sales/getCategories');
   },
   methods: {
-    getProducts() {
-      this.$store.dispatch('sales/getProducts');
-    },
-    getCategories() {
-      this.$store.dispatch('sales/getCategories');
-    },
     addProduct(id) {
       this.$store.dispatch('sales/addProduct', id);
+    },
+    removeProduct(id) {
+      this.$store.dispatch('sales/removeProduct', id);
     },
   },
   computed: {
