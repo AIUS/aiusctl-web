@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import VueMaterial from 'vue-material';
 
-import App from './App';
+import App from './components/App';
 import store from './store';
 import router, { restrict } from './router';
 

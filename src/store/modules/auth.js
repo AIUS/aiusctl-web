@@ -48,10 +48,10 @@ const actions = {
       commit(types.LOGIN_ERROR, 'Unknown error while trying to log in');
     }
   },
-  logout: async ({ commit, state }, { token }) => {
+  logout: async ({ commit, state }) => {
     commit(types.START_LOGOUT);
     try {
-      const res = await fetch(`${state.endpoint}/token/${token}`, {
+      const res = await fetch(`${state.endpoint}/token/${state.token}`, {
         method: 'DELETE',
       });
 

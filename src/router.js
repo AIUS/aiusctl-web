@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './components/Home';
-import Login from './components/Login';
-import PreCrocs from './components/PreCrocs';
-import PreRegister from './components/PreRegister';
-import Calendar from './components/Calendar';
-import Crocs from './components/Crocs';
-import Sales from './components/Sales';
-import Settings from './components/Settings';
-import Users from './components/Users';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import PreCrocs from './components/pages/PreCrocs';
+import PreRegister from './components/pages/PreRegister';
+import Calendar from './components/pages/Calendar';
+import Crocs from './components/pages/Crocs';
+import Sales from './components/pages/Sales';
+import Settings from './components/pages/Settings';
+import Users from './components/pages/Users';
 
 Vue.use(VueRouter);
 
