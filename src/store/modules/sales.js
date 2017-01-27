@@ -31,7 +31,15 @@ const getters = {
       products: state.products.filter(p => !p.category),
     },
   ]),
-  cart: state => state.cart,
+  cart: state => state.cart.map((item) => {
+    const product = state.products.find(p => p.id === item.id);
+    return ({
+      ...item,
+      price: product.price * item.nb,
+      product,
+    });
+  }),
+  total: (state, gtrs) => gtrs.cart.reduce((t, i) => t + i.price, 0),
 };
 
 const actions = {
