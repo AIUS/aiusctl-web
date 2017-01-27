@@ -2,7 +2,7 @@
   <div id="app">
     <md-layout md-column>
       <md-toolbar>
-        <md-button class="md-icon-button" @click="toggleSidebar">
+        <md-button class="md-icon-button hamburger" @click="toggleSidebar">
           <md-icon>menu</md-icon>
         </md-button>
 
@@ -76,6 +76,20 @@ body {
 
 #app > .md-layout > .main > * {
   transform: translate3d(0, 0, 0);
+}
+
+@media (min-width: 1281px) {
+  #app > .md-layout {
+    margin-left: 304px;
+  }
+
+  .md-toolbar .md-title {
+    margin-left: 8px;
+  }
+
+  .hamburger {
+    display: none;
+  }
 }
 
 .fade-enter-active, .fade-leave-active {

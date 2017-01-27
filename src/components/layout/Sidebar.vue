@@ -1,5 +1,5 @@
 <template>
-  <md-sidenav ref="sidebar" class="md-left">
+  <md-sidenav ref="sidebar" class="md-left main-sidebar">
     <md-toolbar class="md-large">
       <div class="md-toolbar-container">
         <h3 class="md-title">AIUS</h3>
@@ -76,3 +76,18 @@ export default {
   },
 };
 </script>
+
+<style>
+@media (min-width: 1281px) {
+  .main-sidebar.md-sidenav .md-sidenav-content {
+    top: 0;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  }
+
+  .main-sidebar.md-sidenav .md-backdrop {
+    display: none;
+  }
+}
+</style>
