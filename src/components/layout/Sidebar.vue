@@ -9,13 +9,13 @@
     <md-list class="dense">
       <md-list-item>
         <router-link :to="{ name: 'preCrocs' }">
-	  <md-icon>restaurant_menu</md-icon>
+          <md-icon>restaurant_menu</md-icon>
           <span>Réservez votre croc'</span>
         </router-link>
       </md-list-item>
       <md-list-item v-if="!logged">
         <router-link :to="{ name: 'preRegister' }">
-	  <md-icon>add_circle_outline</md-icon>
+          <md-icon>add_circle_outline</md-icon>
           <span>Pré-inscription</span>
         </router-link>
       </md-list-item>
@@ -23,44 +23,44 @@
       <template v-if="logged">
         <md-list-item>
           <router-link :to="{ name: 'sales' }">
-	    <md-icon>shopping_cart</md-icon>
-	    <span>Caisse</span>
-	  </router-link>
+            <md-icon>shopping_cart</md-icon>
+            <span>Caisse</span>
+          </router-link>
         </md-list-item>
         <md-list-item>
           <router-link :to="{ name: 'crocs' }">
-            <md-icon style="opacity: 0.54" :md-src="crocsIconUri"></md-icon>
-	    <span>Gestion des Crocs</span>
-	  </router-link>
+            <crocs-icon />
+            <span>Gestion des Crocs</span>
+          </router-link>
         </md-list-item>
         <md-list-item>
           <router-link :to="{ name: 'calendar' }">
-	    <md-icon>event</md-icon>
-	    <span>Calendrier</span>
-	  </router-link>
+            <md-icon>event</md-icon>
+            <span>Calendrier</span>
+          </router-link>
         </md-list-item>
         <md-list-item>
           <router-link :to="{ name: 'settings' }">
-	    <md-icon>settings</md-icon>
-	    <span>Modifier mes informations</span>
-	  </router-link>
+            <md-icon>settings</md-icon>
+            <span>Modifier mes informations</span>
+          </router-link>
         </md-list-item>
         <md-list-item>
           <router-link :to="{ name: 'users' }">
-	    <md-icon>build</md-icon>
-	    <span>Gestion des utilisateurs</span>
-	  </router-link>
+            <md-icon>build</md-icon>
+            <span>Gestion des utilisateurs</span>
+          </router-link>
         </md-list-item>
         <md-list-item @click.capture="$store.dispatch('auth/logout')">
-	  <md-icon>lock_open</md-icon>
+          <md-icon>lock_open</md-icon>
           <span>Déconnexion</span>
         </md-list-item>
       </template>
 
       <md-list-item v-if="!logged">
         <router-link :to="{ name: 'login' }">
-	  <md-icon>lock_outline</md-icon>
-	  <span>Connexion</span>
+          <md-icon>lock_outline</md-icon>
+          <span>Connexion</span>
         </router-link>
       </md-list-item>
     </md-list>
@@ -69,13 +69,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import crocsIconUri from '../../assets/crocs-icon.svg';
+import CrocsIcon from '../misc/CrocsIcon';
 
 export default {
   name: 'sidebar',
-  data() {
-    return { crocsIconUri };
-  },
+  components: { CrocsIcon },
   computed: {
     ...mapGetters('auth', ['logged']),
   },
