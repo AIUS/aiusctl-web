@@ -91,7 +91,7 @@ const actions = {
   removeProduct: async ({ commit }, id) => {
     commit(types.REMOVE_PRODUCT, id);
   },
-  submitCart: async ({ commit, state }) => {
+  submitCart: async ({ commit, state, rootState }) => {
     if (state.cart.length > 0) {
       commit(types.START_CART_SUBMIT);
       try {
@@ -102,6 +102,7 @@ const actions = {
           }),
           body: JSON.stringify({
             data: state.cart,
+            token: rootState.auth.token,
           }),
         });
 
