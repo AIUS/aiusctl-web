@@ -16,7 +16,7 @@
         <md-table-row v-for="product in category.products">
           <md-table-cell>{{ product.name }}</md-table-cell>
           <md-table-cell>{{ product.price.toFixed(2) }} €</md-table-cell>
-          <md-table-cell><md-button class="md-icon-button" @click="addProduct(product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
+          <md-table-cell><md-button class="md-icon-button" @click="$store.dispatch('sales/addProduct', product.id)"><md-icon>add_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
       </md-table-body>
     </md-table>
@@ -34,16 +34,16 @@
       </md-table-header>
       <md-table-body>
         <md-table-row v-for="item in cart">
-          <md-table-cell>{{ item.product.name }}</md-table-cell>
+          <md-table-cell>{{ item.product.name }} (x{{ item.quantity }})</md-table-cell>
           <md-table-cell>{{ item.price.toFixed(2) }} €</md-table-cell>
-          <md-table-cell><md-button class="md-icon-button" @click="removeProduct(item.id)"><md-icon>remove_shopping_cart</md-icon></md-table-cell>
+          <md-table-cell><md-button class="md-icon-button" @click="$store.dispatch('sales/removeProduct', item.id)"><md-icon>remove_shopping_cart</md-icon></md-table-cell>
         </md-table-row>
         <md-table-row>
           <md-table-cell><strong>TOTAL :</strong></md-table-cell>
           <md-table-cell><strong>{{ total.toFixed(2) }} €</strong></md-table-cell>
           <md-table-cell>
             <md-button class="md-icon-button" @click="$store.dispatch('sales/emptyCart')"><md-icon>delete</md-icon></md-button>
-            <md-button class="md-icon-button"><md-icon class="md-primary">check</md-icon></md-button>
+            <md-button class="md-icon-button" @click="$store.dispatch('sales/submitCart')"><md-icon class="md-primary">check</md-icon></md-button>
           </md-table-cell>
         </md-table-row>
       </md-table-body>
@@ -62,19 +62,10 @@ export default {
     this.$store.dispatch('sales/getProducts');
     this.$store.dispatch('sales/getCategories');
   },
-  methods: {
-    addProduct(id) {
-      this.$store.dispatch('sales/addProduct', id);
-    },
-    removeProduct(id) {
-      this.$store.dispatch('sales/removeProduct', id);
-    },
-  },
   computed: {
     ...mapGetters('sales', [
       'pending',
       'errored',
-      'fetched',
       'categories',
       'cart',
       'total',

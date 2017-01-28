@@ -85,33 +85,37 @@ const actions = {
       commit(types.CATEGORIES_ERROR, 'Unknown error while trying to get categories');
     }
   },
-  addProduct: async ({ commit, state }, id) => {
+  addProduct: async ({ commit }, id) => {
     commit(types.ADD_PRODUCT, id);
   },
-  removeProduct: async ({ commit, state }, id) => {
+  removeProduct: async ({ commit }, id) => {
     commit(types.REMOVE_PRODUCT, id);
   },
-  submitCart: async ({ commit, state }, data) => {
-    commit(types.START_CART_SUBMIT);
-    try {
-      const res = await fetch(`${state.endpoint}/sales`, {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(data),
-      });
+  submitCart: async ({ commit, state }) => {
+    if (state.cart.length > 0) {
+      commit(types.START_CART_SUBMIT);
+      try {
+        const res = await fetch(`${state.endpoint}/sale`, {
+          method: 'POST',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+          }),
+          body: JSON.stringify({
+            data: state.cart,
+          }),
+        });
 
-      const body = await res.json();
+        const body = await res.json();
 
-      if (res.status !== 200) {
-        commit(types.CART_SUBMIT_ERROR, body.message);
-        return;
+        if (res.status !== 200) {
+          commit(types.CART_SUBMIT_ERROR, body.message);
+          return;
+        }
+
+        commit(types.CART_SUBMIT, body);
+      } catch (e) {
+        commit(types.CART_SUBMIT_ERROR, 'Unknown error while trying to submit cart');
       }
-
-      commit(types.CART_SUBMIT, body);
-    } catch (e) {
-      commit(types.CART_SUBMIT_ERROR, 'Unknown error while trying to submit cart');
     }
   },
   emptyCart: async ({ commit }) => {
@@ -130,7 +134,6 @@ const mutations = {
     state.errored = false;
   },
   [types.PRODUCTS_ERROR](state) {
-    // @TODO: Do something with the message
     state.pending = false;
     state.errored = true;
   },
@@ -144,7 +147,6 @@ const mutations = {
     state.errored = false;
   },
   [types.CATEGORIES_ERROR](state) {
-    // @TODO: Do something with the message
     state.pending = false;
     state.errored = true;
   },
@@ -169,6 +171,7 @@ const mutations = {
   [types.CART_SUBMIT](state) {
     state.pending = false;
     state.errored = false;
+    state.cart = [];
   },
   [types.CART_SUBMIT_ERROR](state) {
     state.pending = false;
