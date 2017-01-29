@@ -2,7 +2,7 @@
   <md-sidenav ref="sidebar" class="md-left main-sidebar md-whiteframe-2dp">
     <md-toolbar class="md-large app-logo" md-theme="white">
       <router-link :to="{ name: 'home' }">
-        <img src="../../assets/logo.svg" />
+        <img id="logo" src="../../assets/logo.svg" />
       </router-link>
     </md-toolbar>
 
@@ -117,7 +117,7 @@ export default {
     align-items: center;
 }
 
-.app-logo img {
+.app-logo img#logo {
   height: 150px;
   margin: 16px 0;
 }

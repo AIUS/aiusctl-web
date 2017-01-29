@@ -88,7 +88,7 @@ export default {
 }
 
 .done {
-  margin: 13px;
+  margin: 1px;
 }
 
 .login-card.pending .md-spinner,
