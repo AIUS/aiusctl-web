@@ -6,6 +6,8 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+var OfflinePlugin = require('offline-plugin')
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
@@ -37,6 +39,10 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new FaviconsWebpackPlugin({
+      logo: 'src/assets/logo.svg',
+      prefix: config.build.assetsSubDirectory + '/icons-[hash]/',
+    }),
     // extract css into its own file
     new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
     // generate dist index.html with correct asset hash for caching.
@@ -77,7 +83,14 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    })
+    }),
+    new OfflinePlugin({
+      safeToUseOptionalCaches: true,
+      caches: {
+        main: ['index.html', ':rest:'],
+        optional: [config.build.assetsSubDirectory + '/icons-*/*'],
+      }
+    }),
   ]
 })
 

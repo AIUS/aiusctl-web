@@ -40,3 +40,8 @@ new Vue({
   router,
   components: { App },
 });
+
+if (process.env.NODE_ENV === 'production') {
+  /* eslint-disable global-require */
+  require('offline-plugin/runtime').install();
+}
