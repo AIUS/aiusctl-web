@@ -8,6 +8,7 @@ import PreRegister from './components/pages/PreRegister';
 import Calendar from './components/pages/Calendar';
 import Crocs from './components/pages/Crocs';
 import Sales from './components/pages/Sales';
+import SalesEdit from './components/pages/SalesEdit';
 import Settings from './components/pages/Settings';
 import Users from './components/pages/Users';
 
@@ -49,6 +50,11 @@ const routes = [{
   path: '/sales',
   meta: { requiresAuth: true },
   component: Sales,
+}, {
+  name: 'salesEdit',
+  path: '/sales/edit',
+  meta: { requiresAuth: true },
+  component: SalesEdit,
 }, {
   name: 'settings',
   path: '/settings',

@@ -28,6 +28,12 @@
           </router-link>
         </md-list-item>
         <md-list-item>
+          <router-link :to="{ name: 'salesEdit' }">
+            <md-icon>build</md-icon>
+            <span>Gestion de la caisse</span>
+          </router-link>
+        </md-list-item>
+        <md-list-item>
           <router-link :to="{ name: 'crocs' }">
             <crocs-icon />
             <span>Gestion des Crocs</span>
