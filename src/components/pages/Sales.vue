@@ -12,9 +12,8 @@
       </div>
     </section>
 
-    <section v-for="category in categories">
-      <h2>Commande :</h2>
-      <md-table>
+    <h2>Commande :</h2>
+    <md-table>
       <md-table-header>
         <md-table-row>
           <md-table-head>Nom du produit</md-table-head>
@@ -38,7 +37,6 @@
         </md-table-row>
       </md-table-body>
     </md-table>
-    </section>
   </div>
 </template>
 
